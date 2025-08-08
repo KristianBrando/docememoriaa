@@ -17,7 +17,7 @@ import {
   ShoppingCart
 } from 'lucide-react'
 import brigadeiroTradicionalImg from '../assets/1000177311.png'
-import brigadeiroGourmetImg from '../assets/1000177314.png'
+import brigadeiroGourmetImg from '/brigadeirodecrurroseninho.jpg'
 import boloTopoImg from '/boloconfeitado+topo.jpg'
 import boloUnicornioImg from '/boloconfeitado+topounicornio.jpg'
 import boloSimplesImg from '/boloconfeitadosimples.jpg'
@@ -75,11 +75,16 @@ const CakeOrderForm = ({ onClose }) => {
 
   const specialFillings = [
     'Brigadeiro com morangos',
-    'Quatro leites com morangos / abacaxi / uva',
-    'Creme de Ninho com morango / abacaxi / uva verde',
+    'Quatro leites com morango',
+    'Quatro leites com abacaxi', 
+    'Quatro leites com uva verde',
+    'Creme de Ninho com morango',
+    'Creme de Ninho com abacaxi',
+    'Creme de Ninho com uva verde',
+    'Creme de Ninho com manga',
+    'Creme de Ninho com pêssego',
     'Nata com morango e suspiros',
-    'Doce de leite com abacaxi e coco',
-    'Creme de Ninho com frutas (abacaxi, morango, uva, manga ou pêssego)'
+    'Doce de leite com abacaxi e coco'
   ]
 
   const decorationExtras = [
@@ -256,14 +261,32 @@ const CakeOrderForm = ({ onClose }) => {
   const handleSendWhatsApp = () => {
     const message = generateWhatsAppMessage()
     const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
-    window.open(url, '_blank')
+    // Garantir que o redirecionamento funcione corretamente
+    if (window.innerWidth <= 768) {
+      // Em dispositivos móveis, usar window.location para melhor compatibilidade
+      window.location.href = url
+    } else {
+      // Em desktop, abrir em nova aba
+      window.open(url, '_blank')
+    }
+    // Fechar o formulário após enviar
+    onClose()
   }
 
   const handlePayNow = () => {
     const message = generateWhatsAppMessage()
     const pixMessage = `${message}\n\n💳 *PAGAMENTO VIA PIX*\n\nChave PIX: 47999484461\nNome: Vitória Souza\n\n✅ Após efetuar o pagamento, envie o comprovante por este WhatsApp para confirmar seu pedido.`
     const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(pixMessage)}`
-    window.open(url, '_blank')
+    // Garantir que o redirecionamento funcione corretamente
+    if (window.innerWidth <= 768) {
+      // Em dispositivos móveis, usar window.location para melhor compatibilidade
+      window.location.href = url
+    } else {
+      // Em desktop, abrir em nova aba
+      window.open(url, '_blank')
+    }
+    // Fechar o formulário após enviar
+    onClose()
   }
 
   const nextStep = () => {
@@ -695,25 +718,25 @@ const CakeOrderForm = ({ onClose }) => {
                       <img 
                         src={brigadeiroNesquikImg} 
                         alt="Brigadeiro Gourmet Nesquik" 
-                        className="w-20 h-20 rounded-full object-cover border-3 border-pink-200 shadow-lg"
+                        className="w-32 h-32 rounded-full object-cover border-4 border-pink-200 shadow-lg"
                       />
-                      <p className="text-xs text-gray-500 mt-1">Gourmet Nesquik</p>
+                      <p className="text-sm text-gray-600 mt-2 font-medium">Gourmet Nesquik</p>
                     </div>
                     <div className="text-center">
                       <img 
                         src={brigadeiroNinhoChurrosImg} 
                         alt="Brigadeiro Gourmet Ninho e Churros" 
-                        className="w-20 h-20 rounded-full object-cover border-3 border-yellow-200 shadow-lg"
+                        className="w-32 h-32 rounded-full object-cover border-4 border-yellow-200 shadow-lg"
                       />
-                      <p className="text-xs text-gray-500 mt-1">Gourmet Ninho/Churros</p>
+                      <p className="text-sm text-gray-600 mt-2 font-medium">Gourmet Ninho/Churros</p>
                     </div>
                     <div className="text-center">
                       <img 
                         src={brigadeiroDoisAmoresImg} 
                         alt="Brigadeiro Tradicional Dois Amores" 
-                        className="w-20 h-20 rounded-full object-cover border-3 border-purple-200 shadow-lg"
+                        className="w-32 h-32 rounded-full object-cover border-4 border-purple-200 shadow-lg"
                       />
-                      <p className="text-xs text-gray-500 mt-1">Tradicional Dois Amores</p>
+                      <p className="text-sm text-gray-600 mt-2 font-medium">Tradicional Dois Amores</p>
                     </div>
                   </div>
                 </div>
@@ -757,12 +780,14 @@ const CakeOrderForm = ({ onClose }) => {
                   {/* Traditional Brigadeiros */}
                   <Card className="border-2" style={{borderColor: '#f0e6f7'}}>
                     <CardHeader>
-                      <CardTitle className="flex items-center justify-between">
+                      <CardTitle className="flex flex-col space-y-2">
                         <div className="flex items-center">
-                          <img src={brigadeiroTradicionalImg} alt="Brigadeiro Tradicional" className="w-12 h-12 mr-2 rounded-full object-cover" />
+                          <img src={brigadeiroTradicionalImg} alt="Brigadeiro Tradicional" className="w-12 h-12 mr-3 rounded-full object-cover" />
                           <span style={{color: '#8b4513'}}>Brigadeiros Tradicionais</span>
                         </div>
-                        <Badge style={{backgroundColor: '#d4a574'}}>R$ 150,00 o cento | R$ 80,00 meio cento</Badge>
+                        <div className="ml-15">
+                          <Badge style={{backgroundColor: '#d4a574'}}>R$ 150,00 o cento | R$ 80,00 meio cento</Badge>
+                        </div>
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
@@ -822,12 +847,14 @@ const CakeOrderForm = ({ onClose }) => {
                   {/* Gourmet Brigadeiros */}
                   <Card className="border-2" style={{borderColor: '#f0e6f7'}}>
                     <CardHeader>
-                      <CardTitle className="flex items-center justify-between">
+                      <CardTitle className="flex flex-col space-y-2">
                         <div className="flex items-center">
-                          <img src={brigadeiroGourmetImg} alt="Brigadeiro Gourmet" className="w-12 h-12 mr-2 rounded-full object-cover" />
+                          <img src={brigadeiroGourmetImg} alt="Brigadeiro Gourmet" className="w-12 h-12 mr-3 rounded-full object-cover" />
                           <span style={{color: '#8b4513'}}>Brigadeiros Gourmet</span>
                         </div>
-                        <Badge style={{backgroundColor: '#e8b4cb'}}>R$ 185,00 o cento | R$ 95,00 meio cento</Badge>
+                        <div className="ml-15">
+                          <Badge style={{backgroundColor: '#e8b4cb'}}>R$ 185,00 o cento | R$ 95,00 meio cento</Badge>
+                        </div>
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
