@@ -444,9 +444,9 @@ const CakeOrderForm = ({ onClose }) => {
                   <img 
                     src={boloTopoImg} 
                     alt="Exemplo de bolo confeitado com topo" 
-                    className="w-24 h-24 mx-auto rounded-full object-cover border-4 border-yellow-200 shadow-lg"
+                    className="w-48 h-32 mx-auto rounded-lg object-cover border-4 border-yellow-200 shadow-lg"
                   />
-                  <p className="text-xs text-gray-500 mt-2">Exemplo: Bolo confeitado com topo</p>
+                  <p className="text-sm text-gray-600 mt-2 font-medium">Exemplo: Bolo confeitado com topo</p>
                 </div>
               </div>
 
@@ -505,9 +505,9 @@ const CakeOrderForm = ({ onClose }) => {
                   <img 
                     src={boloUnicornioImg} 
                     alt="Exemplo de bolo confeitado unicórnio" 
-                    className="w-24 h-24 mx-auto rounded-full object-cover border-4 border-pink-200 shadow-lg"
+                    className="w-48 h-32 mx-auto rounded-lg object-cover border-4 border-pink-200 shadow-lg"
                   />
-                  <p className="text-xs text-gray-500 mt-2">Exemplo: Bolo confeitado temático</p>
+                  <p className="text-sm text-gray-600 mt-2 font-medium">Exemplo: Bolo confeitado temático</p>
                 </div>
               </div>
 
@@ -556,9 +556,9 @@ const CakeOrderForm = ({ onClose }) => {
                   <img 
                     src={boloSimplesImg} 
                     alt="Exemplo de bolo confeitado simples" 
-                    className="w-24 h-24 mx-auto rounded-full object-cover border-4 border-green-200 shadow-lg"
+                    className="w-48 h-32 mx-auto rounded-lg object-cover border-4 border-green-200 shadow-lg"
                   />
-                  <p className="text-xs text-gray-500 mt-2">Exemplo: Bolo confeitado simples</p>
+                  <p className="text-sm text-gray-600 mt-2 font-medium">Exemplo: Bolo confeitado simples</p>
                 </div>
               </div>
 
