@@ -259,34 +259,93 @@ const CakeOrderForm = ({ onClose }) => {
   }
 
   const handleSendWhatsApp = () => {
-    const message = generateWhatsAppMessage()
-    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
-    // Garantir que o redirecionamento funcione corretamente
-    if (window.innerWidth <= 768) {
-      // Em dispositivos móveis, usar window.location para melhor compatibilidade
-      window.location.href = url
-    } else {
-      // Em desktop, abrir em nova aba
-      window.open(url, '_blank')
+    try {
+      const message = generateWhatsAppMessage()
+      const encodedMessage = encodeURIComponent(message)
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`
+      
+      console.log('Redirecionando para WhatsApp:', whatsappUrl)
+      
+      // Criar um link temporário e clicar nele para garantir o redirecionamento
+      const link = document.createElement('a')
+      link.href = whatsappUrl
+      link.target = '_blank'
+      link.rel = 'noopener noreferrer'
+      
+      // Adicionar o link ao DOM temporariamente
+      document.body.appendChild(link)
+      
+      // Clicar no link
+      link.click()
+      
+      // Remover o link do DOM
+      document.body.removeChild(link)
+      
+      // Fechar o modal após um pequeno delay
+      setTimeout(() => {
+        if (onClose) {
+          onClose()
+        }
+      }, 500)
+      
+    } catch (error) {
+      console.error('Erro ao enviar para WhatsApp:', error)
+      // Fallback: tentar redirecionamento direto
+      const message = generateWhatsAppMessage()
+      const encodedMessage = encodeURIComponent(message)
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`
+      window.open(whatsappUrl, '_blank')
+      
+      if (onClose) {
+        onClose()
+      }
     }
-    // Fechar o formulário após enviar
-    onClose()
   }
 
   const handlePayNow = () => {
-    const message = generateWhatsAppMessage()
-    const pixMessage = `${message}\n\n💳 *PAGAMENTO VIA PIX*\n\nChave PIX: 47999484461\nNome: Vitória Souza\n\n✅ Após efetuar o pagamento, envie o comprovante por este WhatsApp para confirmar seu pedido.`
-    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(pixMessage)}`
-    // Garantir que o redirecionamento funcione corretamente
-    if (window.innerWidth <= 768) {
-      // Em dispositivos móveis, usar window.location para melhor compatibilidade
-      window.location.href = url
-    } else {
-      // Em desktop, abrir em nova aba
-      window.open(url, '_blank')
+    try {
+      const message = generateWhatsAppMessage()
+      const pixMessage = `${message}\n\n💳 *PAGAMENTO VIA PIX*\n\nChave PIX: 47999484461\nNome: Vitória Souza\n\n✅ Após efetuar o pagamento, envie o comprovante por este WhatsApp para confirmar seu pedido.`
+      const encodedMessage = encodeURIComponent(pixMessage)
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`
+      
+      console.log('Redirecionando para WhatsApp (PIX):', whatsappUrl)
+      
+      // Criar um link temporário e clicar nele para garantir o redirecionamento
+      const link = document.createElement('a')
+      link.href = whatsappUrl
+      link.target = '_blank'
+      link.rel = 'noopener noreferrer'
+      
+      // Adicionar o link ao DOM temporariamente
+      document.body.appendChild(link)
+      
+      // Clicar no link
+      link.click()
+      
+      // Remover o link do DOM
+      document.body.removeChild(link)
+      
+      // Fechar o modal após um pequeno delay
+      setTimeout(() => {
+        if (onClose) {
+          onClose()
+        }
+      }, 500)
+      
+    } catch (error) {
+      console.error('Erro ao enviar para WhatsApp (PIX):', error)
+      // Fallback: tentar redirecionamento direto
+      const message = generateWhatsAppMessage()
+      const pixMessage = `${message}\n\n💳 *PAGAMENTO VIA PIX*\n\nChave PIX: 47999484461\nNome: Vitória Souza\n\n✅ Após efetuar o pagamento, envie o comprovante por este WhatsApp para confirmar seu pedido.`
+      const encodedMessage = encodeURIComponent(pixMessage)
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`
+      window.open(whatsappUrl, '_blank')
+      
+      if (onClose) {
+        onClose()
+      }
     }
-    // Fechar o formulário após enviar
-    onClose()
   }
 
   const nextStep = () => {
